@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { HotKeys } from "react-hotkeys";
 
-import {
-	convertIfNeeded,
-	textChange,
-	getOption
-} from "../actions";
-import TextBox from "../components/TextBox/";
-import ConvertButton from "../components/ConvertButton/";
-import SettingButton from "../components/SettingButton/";
-import Snackbar from "../components/Snackbar/";
+import { convertIfNeeded, textChange, getOption } from "../../actions";
+import TextBox from "../../components/TextBox/";
+import ConvertButton from "../../components/ConvertButton/";
+import Header from "../../components/Header/";
+
+const keyMap = {
+	convert: "command+enter"
+};
 
 class App extends Component {
 	componentDidMount() {
@@ -17,7 +17,7 @@ class App extends Component {
 		let defaultOption = {
 			magic: true,
 			zgFirst: false,
-			copyToClipboard: false,
+			copyToClipboard: true,
 			uniHeader: "[Unicode]",
 			zgHeader: "[Zawgyi]"
 		};
@@ -28,9 +28,6 @@ class App extends Component {
 			option = defaultOption;
 		}
 		dispatch(getOption(option));
-	}
-
-	componentDidUpdate() {
 	}
 
 	handleChange = text => {
@@ -44,24 +41,29 @@ class App extends Component {
 	};
 
 	render() {
-		const { text, show } = this.props;
+		const { text } = this.props;
+		const handlers = {
+			convert: e => {
+				this.handleClick();
+			}
+		};
 
 		return (
-			<div>
-				<TextBox text={text} handleChange={this.handleChange} />
+			<div className="app">
+				<Header />
+				<HotKeys keyMap={keyMap} handlers={handlers}>
+					<TextBox text={text} handleChange={this.handleChange} />
+				</HotKeys>
 				<ConvertButton handleClick={this.handleClick} />
-				{show ? <Snackbar show={show} /> : ""}
-				<SettingButton />
 			</div>
 		);
 	}
 }
 
 const mapStateToProps = state => {
-	const { text, show } = state;
+	const { text } = state;
 	return {
-		text,
-		show
+		text
 	};
 };
 

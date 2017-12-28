@@ -6,8 +6,8 @@ import { Provider } from "react-redux";
 import { createLogger } from "redux-logger";
 import thunk from "redux-thunk";
 import reducer from "./reducers";
-import App from "./containers/App";
-import Setting from "./containers/Setting";
+import App from "./containers/App/";
+import Setting from "./containers/Setting/";
 
 const middleware = [thunk];
 

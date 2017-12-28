@@ -7,7 +7,6 @@ import {
 	OPTION,
 	OPTIONCHANGE,
 	COPYTOCLIPBOARD,
-	SHOWMESSAGE,
 	HIDEMESSAGE
 } from "../actions";
 
@@ -54,11 +53,6 @@ export default (state = {}, action) => {
 			return {
 				...state,
 				text: ""
-			};
-		case SHOWMESSAGE:
-			return {
-				...state,
-				show: true
 			};
 		case HIDEMESSAGE:
 			return {

@@ -1,0 +1,33 @@
+.header h1 {
+	user-select: none;
+	cursor: default;
+	text-align: center;
+	background: #009587;
+	margin: 0;
+	color: rgba(255, 255, 255, 0.8);
+	font-size: 1.7em;
+	font-family: sans-serif;
+	text-transform: uppercase;
+	padding: 0.3em;
+	letter-spacing: 0.26em;
+}
+
+div.setting {
+	position: absolute;
+	top: 1em;
+	right: 0.4em;
+	text-align: center;
+	border: 0.2em solid rgba(255, 255, 255, 0.72);
+	border-radius: 0.3em;
+	padding: 0.3em;
+	font-size: 0.7em;
+}
+
+.setting a {
+	text-decoration: none;
+	color: rgba(255, 255, 255, 0.72);
+	cursor: pointer;
+	text-transform: uppercase;
+	letter-spacing: 0.2em;
+	font-family: sans-serif;
+}

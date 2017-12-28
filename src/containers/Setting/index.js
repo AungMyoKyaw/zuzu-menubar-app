@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { optionChange } from "../actions";
-import Setting from "../components/Setting/";
+import { optionChange } from "../../actions";
+import Setting from "../../components/Setting/";
 
 class SettingContainer extends Component {
 	handleChange = option => {

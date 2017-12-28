@@ -1,5 +1,10 @@
+// import { ipcRenderer } from "electron";
+// const {ipcRenderer} = require('electron')
 import * as knayi from "knayi-myscript";
 import copy from "copy-to-clipboard";
+const electron = window.require("electron");
+// const fs = electron.remote.require("fs");
+const { ipcRenderer } = electron;
 
 export const OPTION = "OPTION";
 export const OPTIONCHANGE = "OPTIONCHANGE";
@@ -9,7 +14,6 @@ export const CONVERTED = "CONVERTED";
 export const SAVING = "SAVING";
 export const SAVED = "SAVED";
 export const COPYTOCLIPBOARD = "COPYTOCLIPBOARD";
-export const SHOWMESSAGE = "SHOWMESSAGE";
 export const HIDEMESSAGE = "HIDEMESSAGE";
 
 const startConverting = () => ({
@@ -31,10 +35,6 @@ const saved = () => ({
 
 const copyText = () => ({
 	type: COPYTOCLIPBOARD
-});
-
-const showMessage = () => ({
-	type: SHOWMESSAGE
 });
 
 export const hideMessage = () => ({
@@ -103,10 +103,7 @@ const convertText = prevState => dispatch => {
 	if (copyToClipboard) {
 		copy(text);
 		dispatch(copyText());
-		dispatch(showMessage());
-		setTimeout(() => {
-			dispatch(hideMessage());
-		}, 4e3);
+		ipcRenderer.send("showNoti", "SUCCESSFULLY COPIED TO CLIPBOARD.");
 	}
 };
 
@@ -129,6 +126,7 @@ export const optionChange = option => (dispatch, getState) => {
 		...getState(),
 		...option
 	};
+	delete options.text;
 	try {
 		window.localStorage.setItem("zuzu", JSON.stringify(options));
 	} catch (e) {}

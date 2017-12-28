@@ -1,38 +1,46 @@
 button {
+	position: absolute;
+	left: 0;
+	bottom: 0;
 	display: block;
-	border-radius: 4px;
-	background-color:#d44146;
-	color:white;
+	background-color: #009587;
+	color: white;
 	border: none;
-	padding: .4em;
-	width: 10em;
+	outline: none;
+	padding: 0.4em;
+	width: 100%;
+	height: 7%;
 	transition: all 0.5s;
 	text-align: center;
-  cursor: pointer;
-  font-size:24px;
-  margin:2em auto;
+	cursor: pointer;
+	font-size: 1.3em;
+	margin: 0 auto;
 }
+
 button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
+	text-transform: uppercase;
+	font-family: sans-serif;
+	letter-spacing: 0.2em;
 }
 
 button span:after {
-  content: '»';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
+	content: "»";
+	position: absolute;
+	opacity: 0;
+	top: 0;
+	right: -20px;
+	transition: 0.5s;
 }
 
 button:hover span {
-  padding-right: 25px;
+	padding-right: 25px;
 }
 
 button:hover span:after {
-  opacity: 1;
-  right: 0;
+	opacity: 1;
+	right: 0;
 }
