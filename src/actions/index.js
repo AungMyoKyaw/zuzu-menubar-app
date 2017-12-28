@@ -1,9 +1,6 @@
-// import { ipcRenderer } from "electron";
-// const {ipcRenderer} = require('electron')
 import * as knayi from "knayi-myscript";
 import copy from "copy-to-clipboard";
 const electron = window.require("electron");
-// const fs = electron.remote.require("fs");
 const { ipcRenderer } = electron;
 
 export const OPTION = "OPTION";
@@ -11,8 +8,6 @@ export const OPTIONCHANGE = "OPTIONCHANGE";
 export const TEXTCHANGE = "TEXTCHANGE";
 export const CONVERTING = "CONVERTING";
 export const CONVERTED = "CONVERTED";
-export const SAVING = "SAVING";
-export const SAVED = "SAVED";
 export const COPYTOCLIPBOARD = "COPYTOCLIPBOARD";
 export const HIDEMESSAGE = "HIDEMESSAGE";
 
@@ -23,14 +18,6 @@ const startConverting = () => ({
 const receiveConverted = text => ({
 	type: CONVERTED,
 	text
-});
-
-const startSaving = () => ({
-	type: SAVING
-});
-
-const saved = () => ({
-	type: SAVED
 });
 
 const copyText = () => ({
@@ -48,9 +35,10 @@ const convertText = prevState => dispatch => {
 		uniHeader,
 		zgFirst,
 		zgHeader,
-		copyToClipboard
+		copyToClipboard,
+		closeWindow,
+		showNoti
 	} = prevState;
-	let prevText = text;
 	let zgText, uniText;
 	let encoding;
 	try {
@@ -93,23 +81,23 @@ const convertText = prevState => dispatch => {
 		}
 	}
 	dispatch(receiveConverted(text));
-	dispatch(startSaving());
-	try {
-		if (prevText.length) {
-			window.localStorage.setItem("zuzu_history", prevText);
-		}
-	} catch (e) {}
-	dispatch(saved());
+
+	//switch option
 	if (copyToClipboard) {
 		copy(text);
 		dispatch(copyText());
+	}
+	if (closeWindow) {
+		ipcRenderer.send("hideWindow");
+	}
+	if (showNoti) {
 		ipcRenderer.send("showNoti", "SUCCESSFULLY COPIED TO CLIPBOARD.");
 	}
 };
 
 const shouldConvert = state => {
-	const { isConverting, isSaving } = state;
-	if (isConverting || isSaving) {
+	const { isConverting, isSaving, text } = state;
+	if (isConverting || isSaving || text === "") {
 		return false;
 	} else {
 		return true;
@@ -145,5 +133,7 @@ export const textChange = text => ({
 export const convertIfNeeded = () => (dispatch, getState) => {
 	if (shouldConvert(getState())) {
 		dispatch(convertText(getState()));
+	} else {
+		console.log("SHOULD NOT BE CONVERTED");
 	}
 };

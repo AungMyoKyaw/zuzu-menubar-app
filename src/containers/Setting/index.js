@@ -13,8 +13,10 @@ class SettingContainer extends Component {
 	render() {
 		const {
 			magic = true,
-			copyToClipboard = false,
+			copyToClipboard = true,
 			zgFirst = false,
+			closeWindow = true,
+			showNoti = true,
 			uniHeader = "[Unicode]",
 			zgHeader = "[Zawgyi]"
 		} = this.props;
@@ -26,6 +28,8 @@ class SettingContainer extends Component {
 				copyToClipboard={copyToClipboard}
 				uniHeader={uniHeader}
 				zgHeader={zgHeader}
+				closeWindow={closeWindow}
+				showNoti={showNoti}
 				handleChange={this.handleChange}
 			/>
 		);
@@ -33,12 +37,22 @@ class SettingContainer extends Component {
 }
 
 const mapStateToProps = state => {
-	const { magic, copyToClipboard, zgFirst, uniHeader, zgHeader } = state;
+	const {
+		magic,
+		copyToClipboard,
+		zgFirst,
+		uniHeader,
+		zgHeader,
+		closeWindow,
+		showNoti
+	} = state;
 	return {
 		magic,
 		copyToClipboard,
 		zgFirst,
 		uniHeader,
+		closeWindow,
+		showNoti,
 		zgHeader
 	};
 };

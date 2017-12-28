@@ -8,7 +8,8 @@ import ConvertButton from "../../components/ConvertButton/";
 import Header from "../../components/Header/";
 
 const keyMap = {
-	convert: "command+enter"
+	convert: "command+enter",
+	pref: "command+,"
 };
 
 class App extends Component {
@@ -18,6 +19,8 @@ class App extends Component {
 			magic: true,
 			zgFirst: false,
 			copyToClipboard: true,
+			closeWindow: true,
+			showNoti: true,
 			uniHeader: "[Unicode]",
 			zgHeader: "[Zawgyi]"
 		};
@@ -45,17 +48,24 @@ class App extends Component {
 		const handlers = {
 			convert: e => {
 				this.handleClick();
+			},
+			pref: e => {
+				if (this.props.location.pathname === "/") {
+					this.props.history.push("/setting");
+				} else {
+					this.props.history.push("/");
+				}
 			}
 		};
 
 		return (
-			<div className="app">
-				<Header />
-				<HotKeys keyMap={keyMap} handlers={handlers}>
+			<HotKeys keyMap={keyMap} handlers={handlers}>
+				<div className="app">
+					<Header />
 					<TextBox text={text} handleChange={this.handleChange} />
-				</HotKeys>
-				<ConvertButton handleClick={this.handleClick} />
-			</div>
+					<ConvertButton handleClick={this.handleClick} />
+				</div>
+			</HotKeys>
 		);
 	}
 }

@@ -19,7 +19,6 @@
 	transform: translate(-50%, -50%);
 	display: block;
 	width: 80%;
-	height: 20em;
 	background: white;
 	padding: 1em 2em;
 }
@@ -72,6 +71,7 @@ label span {
 	float: left;
 	margin-left: 0.4em;
 	line-height: 1.8em;
+	width: 80%;
 	text-transform: uppercase;
 	font-family: sans-serif;
 	font-size: 1.2em;

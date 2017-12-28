@@ -1,8 +1,6 @@
 import {
 	CONVERTING,
 	CONVERTED,
-	SAVING,
-	SAVED,
 	TEXTCHANGE,
 	OPTION,
 	OPTIONCHANGE,
@@ -38,16 +36,6 @@ export default (state = {}, action) => {
 				...state,
 				text: action.text,
 				isConverting: false
-			};
-		case SAVING:
-			return {
-				...state,
-				isSaving: true
-			};
-		case SAVED:
-			return {
-				...state,
-				isSaving: false
 			};
 		case COPYTOCLIPBOARD:
 			return {

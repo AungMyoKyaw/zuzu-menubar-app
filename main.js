@@ -14,14 +14,23 @@ const mb = new menubar({
 	height: 600,
 	preloadWindow: true,
 	tooltip: "ZUZU",
+	icon: path.join(__dirname, "/assets/zuzu.png"),
 	resizable: false
 });
 
 mb.on("ready", () => {
-	// mb.showWindow();
+	//show noti
 	ipcMain.on("showNoti", (event, arg) => {
-		const myNoti = new Notification({ title: "zuzu", body: arg });
+		const myNoti = new Notification({
+			title: "zuzu",
+			body: arg
+		});
 		myNoti.show();
+	});
+
+	//hide window
+	ipcMain.on("hideWindow", (event, arg) => {
+		mb.hideWindow();
 	});
 
 	//register show/hide window shortcut
@@ -32,19 +41,10 @@ mb.on("ready", () => {
 				mb.hideWindow();
 			} else {
 				mb.showWindow();
-				// mb.window.focus();
+				mb.window.focus();
 			}
 		}
 	);
-
-	//register copy/cut shortcut
-	// const onCopy = globalShortcut.register("CommandOrControl+C", () => {
-	// 	console.log("copied");
-	// });
-
-	// const onCut = globalShortcut.register("CommandOrControl+X", () => {
-	// 	console.log("cut");
-	// });
 
 	if (!toggleWindow) {
 		console.log("REGISTRATION FAIL");
@@ -53,9 +53,8 @@ mb.on("ready", () => {
 
 mb.on("after-create-window", () => {
 	if (isDev) {
-		// Open the DevTools.
-		mb.window.webContents.openDevTools();
 		indexPath = `http://localhost:3000/`;
+		mb.setOption("alwaysOnTop", true);
 	} else {
 		indexPath = `file://${path.join(__dirname, "/build/index.html")}`;
 	}

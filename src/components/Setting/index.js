@@ -11,6 +11,8 @@ class Setting extends Component {
 			zgFirst,
 			uniHeader,
 			zgHeader,
+			closeWindow,
+			showNoti,
 			handleChange
 		} = this.props;
 
@@ -88,6 +90,36 @@ class Setting extends Component {
 							<span />
 						</label>
 						<div className="optionName">Copy to Clipboard</div>
+					</div>
+					<div className="option">
+						<label>
+							<input
+								type="checkbox"
+								checked={closeWindow}
+								onChange={e => {
+									handleChange({
+										closeWindow: e.target.checked
+									});
+								}}
+							/>
+							<span />
+						</label>
+						<div className="optionName">Close Window After Converted</div>
+					</div>
+					<div className="option">
+						<label>
+							<input
+								type="checkbox"
+								checked={showNoti}
+								onChange={e => {
+									handleChange({
+										showNoti: e.target.checked
+									});
+								}}
+							/>
+							<span />
+						</label>
+						<div className="optionName">Show Noti After Converted</div>
 					</div>
 				</div>
 			</div>
