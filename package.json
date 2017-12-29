@@ -1,10 +1,13 @@
 {
-	"name": "zuzu-electron",
+	"name": "zuzu",
 	"version": "1.0.0",
 	"license": "MIT",
+	"description": "Z<=>U",
+	"author": "Aung Myo Kyaw",
 	"dependencies": {
 		"copy-to-clipboard": "^3.0.8",
-		"knayi-myscript": "file:knayi.tgz",
+		"electron-is-dev": "^0.3.0",
+		"knayi-myscript": "https://github.com/AungMyoKyaw/knayi-myscript/archive/v2.2.1.tar.gz",
 		"menubar": "^5.2.3",
 		"prop-types": "^15.6.0",
 		"react": "^16.2.0",
@@ -17,19 +20,37 @@
 	},
 	"scripts": {
 		"start": "concurrently \"npm run start:react;\" \"wait-on http://localhost:3000 && npm run start:electron\"",
-		"start:electron": "electron main.js",
+		"start:electron": "electron public/electron.js",
 		"start:react": "react-scripts start",
 		"build:react": "react-scripts build",
+		"build": "build -wm",
+		"build:win": "build -w",
+		"build:mac": "build -m",
+		"prebuild": "npm run build:react",
+		"prebuild:win": "npm run build:react",
+		"prebuild:mac": "npm run build:react",
+		"build:test": "electron build/electron.js",
 		"test": "react-scripts test --env=jsdom",
 		"eject": "react-scripts eject"
 	},
 	"devDependencies": {
 		"concurrently": "^3.5.1",
 		"electron": "^1.7.10",
-		"electron-is-dev": "^0.3.0",
+		"electron-builder": "^19.49.2",
 		"react-scripts": "1.0.17",
 		"redux-logger": "^3.0.6",
 		"wait-on": "^2.0.2"
 	},
-	"homepage": "./"
+	"homepage": "./",
+	"build": {
+		"appId": "com.aungmyokyaw.zuzu",
+		"files": [
+			"build/**/*",
+			"node_modules/**/*",
+			"assets/zuzu.png"
+		],
+		"directories": {
+			"buildResources": "assets"
+		}
+	}
 }

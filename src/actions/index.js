@@ -90,8 +90,11 @@ const convertText = prevState => dispatch => {
 	if (closeWindow) {
 		ipcRenderer.send("hideWindow");
 	}
-	if (showNoti) {
+	if (showNoti && copyToClipboard) {
 		ipcRenderer.send("showNoti", "SUCCESSFULLY COPIED TO CLIPBOARD.");
+	}
+	if (showNoti) {
+		ipcRenderer.send("showNoti", "SUCCESSFULLY CONVERTED");
 	}
 };
 

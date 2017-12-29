@@ -8,8 +8,8 @@ import ConvertButton from "../../components/ConvertButton/";
 import Header from "../../components/Header/";
 
 const keyMap = {
-	convert: "command+enter",
-	pref: "command+,"
+	convert: ["command+enter","ctrl+enter"],
+	pref: ["command+,","ctrl+,"]
 };
 
 class App extends Component {
