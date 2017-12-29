@@ -9,7 +9,6 @@
 		"electron-is-dev": "^0.3.0",
 		"knayi-myscript": "https://github.com/AungMyoKyaw/knayi-myscript/archive/v2.2.1.tar.gz",
 		"menubar": "^5.2.3",
-		"prop-types": "^15.6.0",
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0",
 		"react-hotkeys": "^0.10.0",
