@@ -101,6 +101,7 @@ mb.on("ready", () => {
 
 mb.on("after-create-window", () => {
 	if (isDev) {
+		mb.window.webContents.openDevTools()
 		indexPath = `http://localhost:3000/`;
 		mb.setOption("alwaysOnTop", true);
 	} else {
