@@ -35,8 +35,8 @@
   },
   "devDependencies": {
     "concurrently": "^3.5.1",
-    "electron": "^1.7.11",
-    "electron-builder": "^19.55.3",
+    "electron": "^1.8.6",
+    "electron-builder": "^20.10.0",
     "react-scripts": "1.0.17",
     "redux-logger": "^3.0.6",
     "wait-on": "^2.0.2"
